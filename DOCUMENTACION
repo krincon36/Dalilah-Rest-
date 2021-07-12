@@ -1,32 +1,17 @@
-const express = require('express');
-const bodyParser = require("body-parser");
-const app = express();
-  
-// Defining get request at '/' route
-app.get('/', function(req, res) {
-  res.json({
-    number: 1
-  });
-});
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-  
-var mysql = require('mysql');
-
-var connection = mysql.createConnection({
-    host: "webservice.southcentralus.cloudapp.azure.com",
-    user: "root",
-    password: "Genio042019@",
-    database:"tarea"
-  });
-
-connection.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-});
-  
-
+info :
+  título : " Delilah Restó "
+  descripción : " Este es un software de Backend que permite realizar pedidos en línea de un restaurante. Es un API REST que permite operaciones CRUD basado en estructura de datos " . 
+  versión : " 1.0.0 "
+  contacto :
+    Autor : " Kimberly Rincon "
+    correo electrónico : " krincon36@hotmail.com "
+  licencia :
+    nombre : " MIT "
+    url : " https://en.wikipedia.org/wiki/MIT_License "
+host : " localhost: 3000 "
+esquemas :
+- " http "
+opciones :
 // Defining get request at '/multiple' route
 app.get('/GetUsuario/:email', function(req, res) {    
     var result = "Hello World"; // my .ejs see's this
