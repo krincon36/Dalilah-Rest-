@@ -1,0 +1,97 @@
+-- --------------------------------------------------------
+-- Host:                         webservice.southcentralus.cloudapp.azure.com
+-- Versión del servidor:         5.5.62-0ubuntu0.14.04.1 - (Ubuntu)
+-- SO del servidor:              debian-linux-gnu
+-- HeidiSQL Versión:             11.2.0.6213
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+-- Volcando estructura para tabla tarea.pedido
+CREATE TABLE IF NOT EXISTS `pedido` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `fecha` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `nombrecliente` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
+-- Volcando datos para la tabla tarea.pedido: ~11 rows (aproximadamente)
+/*!40000 ALTER TABLE `pedido` DISABLE KEYS */;
+INSERT INTO `pedido` (`id`, `fecha`, `nombrecliente`) VALUES
+	(1, '2021-06-29 21:30:57', 'KIMBERLY RINCON'),
+	(2, '2021-06-29 21:32:43', 'KIMBERLY RINCON'),
+	(3, '2021-06-29 21:33:10', 'KIMBERLY RINCON'),
+	(4, '2021-06-29 21:34:17', 'KIMBERLY RINCON'),
+	(5, '2021-06-29 21:34:57', 'KIMBERLY RINCON'),
+	(6, '2021-06-29 21:35:24', 'KIMBERLY RINCON'),
+	(7, '2021-06-29 21:38:32', 'KIMBERLY RINCON'),
+	(8, '2021-06-29 21:39:30', 'KIMBERLY RINCON'),
+	(9, '2021-06-29 21:40:37', 'KIMBERLY RINCON'),
+	(10, '2021-06-29 21:42:34', 'KIMBERLY RINCON'),
+	(11, '2021-06-29 22:16:35', 'KIMBERLY RINCON');
+/*!40000 ALTER TABLE `pedido` ENABLE KEYS */;
+
+-- Volcando estructura para tabla tarea.pedidoitem
+CREATE TABLE IF NOT EXISTS `pedidoitem` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pedidoid` int(11) NOT NULL DEFAULT '0',
+  `productoid` int(11) NOT NULL DEFAULT '0',
+  `cantidad` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+-- Volcando datos para la tabla tarea.pedidoitem: ~3 rows (aproximadamente)
+/*!40000 ALTER TABLE `pedidoitem` DISABLE KEYS */;
+INSERT INTO `pedidoitem` (`id`, `pedidoid`, `productoid`, `cantidad`) VALUES
+	(2, 2, 1, 7),
+	(3, 2, 2, 5),
+	(4, 7, 3, 3);
+/*!40000 ALTER TABLE `pedidoitem` ENABLE KEYS */;
+
+-- Volcando estructura para tabla tarea.producto
+CREATE TABLE IF NOT EXISTS `producto` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo` varchar(50) DEFAULT NULL,
+  `nombre` varchar(50) NOT NULL DEFAULT '0',
+  `precio` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `codigo` (`codigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+-- Volcando datos para la tabla tarea.producto: ~3 rows (aproximadamente)
+/*!40000 ALTER TABLE `producto` DISABLE KEYS */;
+INSERT INTO `producto` (`id`, `codigo`, `nombre`, `precio`) VALUES
+	(1, 'AG1001', 'AGUACATE HASH', 15000),
+	(3, 'AG1002', 'AGUACATE COMUN', 5000),
+	(5, 'MG1001', 'MANGO DE AZUCAR', 2500);
+/*!40000 ALTER TABLE `producto` ENABLE KEYS */;
+
+-- Volcando estructura para tabla tarea.usuario
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(50) NOT NULL DEFAULT '@',
+  `password` varchar(50) DEFAULT NULL,
+  `rol` varchar(50) DEFAULT 'VENDEDOR',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+-- Volcando datos para la tabla tarea.usuario: ~4 rows (aproximadamente)
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` (`id`, `email`, `password`, `rol`) VALUES
+	(1, 'dadas@dadas.doc', '123456', 'VENDEDOR'),
+	(2, 'kjrvmg2@hotmail.com', '123', 'ADMIN'),
+	(3, 'kjrvmg@gmail.com', '123456', 'VENDEDOR'),
+	(4, 'kjrvmg@hotmail.com', '123', 'ADMIN'),
+	(5, 'kjrvmg3@hotmail.com', '123', 'ADMIN');
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
