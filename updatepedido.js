@@ -1,32 +1,22 @@
-app.post('/PostPedido', function(req, res) {
+app.put('/PutPedidoItem', function (req, res) {
   var procesado = 0;
-  sql= "insert into pedido(nombrecliente) values('"+req.body.nombrecliente+"');",
-  connection.query(sql, function (err, result) {  
-    if (err) 
-    {
-      console.log(err);  
-      res.json([{"resultado":"nada que actualizar"}]);      
-    }
-    else{
-      console.log("1 record inserted");  
-      res.json([{"id":result.insertId}]);      
-    }  
-  });  
-  
-});
+  getUsuarioHeaderData(req);
+  if (usuariorol == "ADMIN") {//solo los admin pueden actualizar
+    sql = "update pedidoitem set productoid='" + req.body.productoid + "',cantidad='" + req.body.cantidad + "' where id='" + req.body.id + "';",
+      connection.query(sql, function (err, result) {
+        if (err) {
+          console.log(err);
+          res.json([{ "resultado": "nada que ejecutar" }]);
+        }
+        else {
+          console.log("1 record updated");
+          res.json([{ "id": result.insertId }]);
 
-app.post('/PostPedidoItem', function(req, res) {
-  var procesado = 0;
-  sql= "insert into pedidoitem(pedidoid,productoid,cantidad) values('"+req.body.pedidoid+"','"+req.body.productoid+"','"+req.body.cantidad+"');",
-  connection.query(sql, function (err, result) {  
-    if (err) 
-    {
-      console.log(err);  
-      res.json([{"resultado":"nada que actualizar"}]);    
-    }
-    else{
-      console.log("1 record inserted");  
-      res.json([{"id":result.insertId}]);      
-    }  
-  });    
+        }
+      });
+  }
+  else {
+    console.log("NO ES ADMIN");
+    res.json([{ "id": 0, "ERROR": "NO ES ADMIN" }]);
+  }
 });
