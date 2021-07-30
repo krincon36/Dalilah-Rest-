@@ -243,6 +243,36 @@ app.put('/PutPedidoItem', function (req, res) {
   }
 });
 
+app.delete('/DeletePedido/:id', function (req, res) {
+  var result = "";
+  getUsuarioHeaderData(req);
+  if (usuariorol == "ADMIN") {//solo los admin pueden borrar pedidos    
+    connection.query("delete from pedidoitem where pedidoid = " + req.params.id + "",
+      function (err, rows) {
+        if (err) {
+          console.log(err);
+        }
+        console.log(rows);
+        result = rows;
+      }
+    );
+    connection.query("delete from pedido where id=" + req.params.id + "",
+      function (err, rows) {
+        if (err) {
+          console.log(err);
+        }
+        console.log(rows);
+        result = rows;
+        res.json(rows);
+      }
+    );
+  }
+  else {
+    console.log("NO ES ADMIN");
+    res.json([{ "id": 0, "ERROR": "NO ES ADMIN" }]);
+  }
+});
+
 app.get('/GetPedidoItems/:pedidoid', function (req, res) {
   var result = "";
   getUsuarioHeaderData(req);
